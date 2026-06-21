@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 const VERIFY_TOKEN = 'mytoken123';
-const PAGE_TOKEN = 'PASTE_YOUR_PAGE_TOKEN_HERE';
+const PAGE_TOKEN = 'EAAOkwV841tIBR7kY6o7Kt1fQfy4GM4NmhQz0MKuYHWZClBSZBdR8sDeN3ednY9CGknvqiOKCFaFpBujwuC7ZCuhirhJ3NB6uyX2OTenMtL84Ix09AMP5ePPEZCjGTrD1924P0KIZBdF7eoE2FkZBeIX19rHsVYkRigReL3PTpXa1WQuHySZBbMgmZCusZBynL7jVcfx8ORpl0d7NQ77zYz5LqDKd4cQZDZD';
 
 app.get('/webhook', (req, res) => {
   const mode = req.query['hub.mode'];
