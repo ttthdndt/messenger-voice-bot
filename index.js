@@ -7,8 +7,15 @@ const VERIFY_TOKEN = 'mytoken123';
 const PAGE_TOKEN = 'PASTE_YOUR_PAGE_TOKEN_HERE';
 
 app.get('/webhook', (req, res) => {
-  if (req.query['hub.verify_token'] === VERIFY_TOKEN) {
-    res.send(req.query['hub.challenge']);
+  const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+  
+  console.log('Verify request:', mode, token, challenge);
+  
+  if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+    console.log('Webhook verified!');
+    res.status(200).send(challenge);
   } else {
     res.sendStatus(403);
   }
@@ -16,6 +23,8 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', async (req, res) => {
   const body = req.body;
+  console.log('Received:', JSON.stringify(body));
+  
   if (body.object === 'page') {
     for (const entry of body.entry) {
       for (const event of entry.messaging) {
